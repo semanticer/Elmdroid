@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  *  Implementation of ComponentRuntime based on RxJava and RxRelay
  */
-internal class RxRuntime<STATE : State, in MSG : Msg, CMD : Cmd> (component: Component<STATE, MSG, CMD>, private val logLevel: LogLevel = LogLevel.NONE) : ComponentRuntime<STATE, MSG> {
+internal class RxRuntime<STATE : State, MSG : Msg, CMD : Cmd> (component: Component<STATE, MSG, CMD>, private val logLevel: LogLevel = LogLevel.NONE) : ComponentRuntime<STATE, MSG> {
 
     private val msgRelay: BehaviorRelay<MSG> = BehaviorRelay.create()
     private val stateRelay: BehaviorRelay<STATE> = BehaviorRelay.create()
@@ -60,6 +60,13 @@ internal class RxRuntime<STATE : State, in MSG : Msg, CMD : Cmd> (component: Com
     override fun dispatch(msg: MSG) {
         msgRelay.accept(msg)
         log(logLevel, LogLevel.BASIC, TAG,"Msg dispatched: $msg")
+    }
+
+    override fun dispatch(msgObs: Observable<MSG>) {
+        val disposable = msgObs
+                .subscribeOn(Schedulers.newThread())
+                .subscribe{ msg -> dispatch(msg) }
+        compositeDisposable.add(disposable)
     }
 
     private fun updateStateValue(stateVal: STATE) {

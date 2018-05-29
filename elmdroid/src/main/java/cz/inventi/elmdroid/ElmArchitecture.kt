@@ -5,11 +5,13 @@ import io.reactivex.Observable
 import io.reactivex.Single
 
 /** UI 'loop' implementation that 'runs" given [Component]. */
-interface ComponentRuntime<STATE : State, in MSG : Msg> : LifecycleObserver {
+interface ComponentRuntime<STATE : State, MSG : Msg> : LifecycleObserver {
     /** Provides always up to date [State]. */
     fun state(): LiveData<STATE>
     /** Dispatch [Msg] to handle. */
     fun dispatch(msg: MSG)
+    /** Dispatch observable that will post [Msg] to handle. */
+    fun dispatch(msgObs: Observable<MSG>)
     /** Stops the inner loop, no more state updates. */
     fun clear()
     /** Runtime will be able to call [clear] by itself based on the [lifecycleOwner] */
