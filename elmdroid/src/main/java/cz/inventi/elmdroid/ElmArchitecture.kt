@@ -57,7 +57,9 @@ interface SimpleComponent<STATE : State, MSG : Msg>: Component<STATE, MSG, Nothi
     fun simpleUpdate(msg: MSG, prevState: STATE): STATE
 }
 
-sealed class Sub<in STATE : State, MSG : Msg>
+sealed class Sub<in STATE : State, MSG : Msg> {
+    open fun onUnsubscribe() {}
+}
 
 /**
  * Subscription that starts with the component creation and ends when runtime is cleared.

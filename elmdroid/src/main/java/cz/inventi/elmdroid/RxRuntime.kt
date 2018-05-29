@@ -44,6 +44,7 @@ internal class RxRuntime<STATE : State, in MSG : Msg, CMD : Cmd> (component: Com
             val subDisposable = subObs
                 .subscribeNewObserveMain()
                 .doOnSubscribe { log(logLevel, LogLevel.FULL, TAG,"Subscribed sub: $sub") }
+                .doOnTerminate { sub.onUnsubscribe() }
                 .subscribe { msg -> dispatch(msg) }
             compositeDisposable.add(subDisposable)
         }
