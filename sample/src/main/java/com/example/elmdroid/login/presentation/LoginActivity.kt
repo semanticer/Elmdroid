@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity(), LoginView  {
         val runtime = createRuntimeFor(LoginComponent())
 
         // observe state
-        renderit(runtime.state(), LoginRenderer(this))
+        renderit(runtime.state(), LoginStateDiffDispatcher.Builder().target(LoginStateViewRenderer(this@LoginActivity)).build())
 
         // setup msg dispatching
         email().setOnTextChangeListener { runtime.dispatch(EmailChanged(it)) }

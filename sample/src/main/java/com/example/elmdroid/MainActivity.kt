@@ -3,6 +3,7 @@ package com.example.elmdroid
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.elmdroid.chess.ChessActivity
 import com.example.elmdroid.counter.CounterActivity
 import com.example.elmdroid.login.presentation.LoginActivity
 import com.example.elmdroid.login.presentation.LoginVMActivity
@@ -15,9 +16,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        counter.setOnClickListener { Intent(this, CounterActivity::class.java).start() }
+        counterLabel.setOnClickListener { Intent(this, CounterActivity::class.java).start() }
         login.setOnClickListener { Intent(this, LoginActivity::class.java).start() }
         loginViewModel.setOnClickListener { Intent(this, LoginVMActivity::class.java).start() }
+        multipleComponentsViewModel.setOnClickListener { Intent(this, ChessActivity::class.java).start() }
     }
 
     private fun Intent.start() = startActivity(this)

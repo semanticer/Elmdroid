@@ -20,6 +20,7 @@
         <activity android:name=".login.presentation.LoginActivity" />
         <activity android:name=".login.presentation.LoginVMActivity" />
         <activity android:name=".counter.CounterActivity" />
+        <activity android:name=".chess.ChessActivity"></activity>
     </application>
 
 </manifest>

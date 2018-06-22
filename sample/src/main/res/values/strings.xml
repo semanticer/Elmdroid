@@ -3,4 +3,5 @@
     <string name="basic_counter">Basic counter</string>
     <string name="complex_login">Complex login</string>
     <string name="complex_login_with_viewmodel">Complex login with ViewModel</string>
+    <string name="chess_clock_multiple_components">Chess Clock - Multiple components</string>
 </resources>

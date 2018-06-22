@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion build_versions.target_sdk
 
@@ -27,9 +29,19 @@ android {
     }
 }
 
+kapt {
+    generateStubs = true
+}
+
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
     implementation project(':elmdroid')
     implementation deps.renderit
+    implementation deps.diff_dispatcher_annotations
+    kapt deps.diff_dispatcher_processor
 
     // arch
     implementation deps.lifecycle.viewmodel
@@ -47,7 +59,7 @@ dependencies {
 
     // unit testing
     testImplementation deps.junit
-    testImplementation (deps.arch_core.testing, {
+    testImplementation(deps.arch_core.testing, {
         exclude group: 'com.android.support', module: 'support-compat'
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-core-utils'

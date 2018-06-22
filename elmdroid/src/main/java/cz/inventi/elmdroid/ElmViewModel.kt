@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 
 
-open class ElmViewModel<STATE : State, in MSG : Msg, CMD : Cmd> (component: Component<STATE, MSG, CMD>, logLevel: LogLevel = LogLevel.NONE) :
+open class ElmViewModel<STATE : State, MSG : Msg, CMD : Cmd> (component: Component<STATE, MSG, CMD>, logLevel: LogLevel = LogLevel.NONE) :
         ViewModel(),
         ComponentRuntime<STATE, MSG> by ComponentRuntime.create(component, logLevel = logLevel) {
 

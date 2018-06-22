@@ -7,7 +7,7 @@ import cz.inventi.elmdroid.createRuntimeFor
 import kotlinx.android.synthetic.main.activity_counter.*
 import net.semanticer.renderit.renderit
 
-class CounterActivity : AppCompatActivity() {
+class CounterActivity : AppCompatActivity(), CounterStateRenderer {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,11 +16,13 @@ class CounterActivity : AppCompatActivity() {
 
         val runtime = createRuntimeFor(CounterComponent())
 
-        renderit(runtime.state()) { state ->
-            state from { it.counter } into { counter.text = "$it" }
-        }
+        renderit(runtime.state(), CounterStateDiffDispatcher.Builder().target(this@CounterActivity).build() )
 
         increment.setOnClickListener { runtime.dispatch(Increment) }
         decrement.setOnClickListener { runtime.dispatch(Decrement) }
+    }
+
+    override fun renderCounter(counter: Int) {
+        counterLabel.text = "$counter"
     }
 }

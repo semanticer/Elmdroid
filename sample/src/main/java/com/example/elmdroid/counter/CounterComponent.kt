@@ -1,5 +1,6 @@
 package com.example.elmdroid.counter
 
+import com.github.dimsuz.diffdispatcher.annotations.DiffElement
 import cz.inventi.elmdroid.*
 
 class CounterComponent: SimpleComponent<CounterState, CounterMsg> {
@@ -11,6 +12,7 @@ class CounterComponent: SimpleComponent<CounterState, CounterMsg> {
     }
 }
 
+@DiffElement(diffReceiver = CounterStateRenderer::class)
 data class CounterState(val counter: Int) : State
 sealed class CounterMsg : Msg
 object Increment : CounterMsg()

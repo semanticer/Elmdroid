@@ -10,7 +10,7 @@
 
 
     <Button
-        android:id="@+id/counter"
+        android:id="@+id/counterLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/basic_counter" />
@@ -31,7 +31,7 @@
         android:id="@+id/multipleComponentsViewModel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text="TODO: Multiple components"/>
+        android:enabled="true"
+        android:text="@string/chess_clock_multiple_components"/>
 
 </LinearLayout>

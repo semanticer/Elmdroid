@@ -1,7 +1,9 @@
 package com.example.elmdroid.login.presentation
 
 import com.example.elmdroid.common.pause
+import com.example.elmdroid.counter.CounterStateRenderer
 import com.example.elmdroid.login.data.UserRepository
+import com.github.dimsuz.diffdispatcher.annotations.DiffElement
 import cz.inventi.elmdroid.*
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -56,6 +58,7 @@ class CounterSubscription : StatefulSub<LoginState, LoginMsg>() {
 
 
 // State
+@DiffElement(diffReceiver = LoginStateRenderer::class)
 data class LoginState(
         val email: String,
         val password: String,

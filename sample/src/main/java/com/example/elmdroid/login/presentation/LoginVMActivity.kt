@@ -21,7 +21,7 @@ class LoginVMActivity : AppCompatActivity(), LoginView {
         val viewModel = getViewModelFor(LoginComponent())
 
         // observe state
-        renderit(viewModel.state(), LoginRenderer(this))
+        renderit(viewModel.state(), LoginStateDiffDispatcher.Builder().target(LoginStateViewRenderer(this@LoginVMActivity)).build())
 
         // setup msg dispatching
         email().setOnTextChangeListener { viewModel.dispatch(EmailChanged(it)) }
